@@ -103,6 +103,7 @@ mkdir -p src/components src/pages src/context src/services src/utils src/styles
 ```bash
 npm run dev
 ```
+Live Demo : https://eco-store-gray.vercel.app
 
 6. **Open your browser** to `http://localhost:5173`
 
