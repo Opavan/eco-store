@@ -29,7 +29,7 @@ const AuthModal = ({ onClose }) => {
     onClose();
   };
 
-  // ✅ Demo login added
+  // ✅ Demo login function
   const handleDemoLogin = () => {
     login({
       name: 'Demo User',
@@ -119,17 +119,6 @@ const AuthModal = ({ onClose }) => {
             </motion.button>
           </form>
 
-          {/* ✅ Demo button */}
-          <motion.button
-            className="btn auth-submit-btn"
-            style={{ marginTop: '10px', background: '#10b981' }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleDemoLogin}
-          >
-             Login as Demo User
-          </motion.button>
-
           <div className="auth-toggle">
             <p>
               {isLogin ? "Don't have an account?" : 'Already have an account?'}
@@ -140,6 +129,28 @@ const AuthModal = ({ onClose }) => {
                 {isLogin ? 'Sign Up' : 'Login'}
               </button>
             </p>
+          </div>
+
+          {/* ✅ Demo button styled like dashboard, at the very bottom */}
+          <div style={{ marginTop: '25px', textAlign: 'center' }}>
+            <motion.button
+              className="btn auth-submit-btn"
+              style={{
+                width: '100%',
+                background: 'linear-gradient(90deg, #10b981, #059669)',
+                color: '#fff',
+                fontWeight: '600',
+                padding: '12px 0',
+                borderRadius: '10px',
+                boxShadow: '0 6px 15px rgba(16,185,129,0.3)',
+                fontSize: '14px'
+              }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={handleDemoLogin}
+            >
+               Login as Demo User
+            </motion.button>
           </div>
 
           <div className="auth-eco-message">
