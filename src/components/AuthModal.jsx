@@ -29,6 +29,15 @@ const AuthModal = ({ onClose }) => {
     onClose();
   };
 
+  // ✅ Demo login added
+  const handleDemoLogin = () => {
+    login({
+      name: 'Demo User',
+      email: 'demo@ecoshop.com'
+    });
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -109,6 +118,17 @@ const AuthModal = ({ onClose }) => {
               {isLogin ? 'Login' : 'Create Account'}
             </motion.button>
           </form>
+
+          {/* ✅ Demo button */}
+          <motion.button
+            className="btn auth-submit-btn"
+            style={{ marginTop: '10px', background: '#10b981' }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleDemoLogin}
+          >
+             Login as Demo User
+          </motion.button>
 
           <div className="auth-toggle">
             <p>
