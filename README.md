@@ -66,7 +66,7 @@ ecommerce-ui/
 └── README.md
 ```
 
-##  Getting Started
+## getting started
 
 ### Prerequisites
 
