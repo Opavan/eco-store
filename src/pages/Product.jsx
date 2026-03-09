@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AIRecommendations from '../components/AIRecommendations';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Heart, Leaf, ArrowLeft, Star } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -150,6 +151,7 @@ const Product = ({ productId, onNavigate }) => {
           </div>
         </div>
       </motion.div>
+      <AIRecommendations currentProduct={product} onNavigate={onNavigate} />
     </div>
   );
 };
