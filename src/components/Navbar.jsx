@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingCart, Heart, User, LogOut, Sun, Moon, Search, Leaf, Menu, X } from 'lucide-react';
+import { ShoppingCart, Heart, User, LogOut, Sun, Moon, Search, Leaf, Menu, X, Package } from 'lucide-react'; // 👈 added Package
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import '../styles/Navbar.css';
@@ -41,7 +41,8 @@ const Navbar = ({ onNavigate, onSearch, onShowAuth }) => {
             onChange={handleSearch}
           />
         </div>
-         {/* Desktop Actions */}
+
+        {/* Desktop Actions */}
         <div className="navbar-actions">
           {/* Dark Mode Toggle */}
           <button
@@ -50,6 +51,16 @@ const Navbar = ({ onNavigate, onSearch, onShowAuth }) => {
             aria-label="Toggle dark mode"
           >
             {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+          </button>
+
+          {/*  NEW — My Orders */}
+          <button
+            className="btn-icon"
+            onClick={() => onNavigate('orders')}
+            aria-label="My Orders"
+            title="My Orders"
+          >
+            <Package size={24} />
           </button>
 
           {/* Wishlist */}
@@ -126,6 +137,10 @@ const Navbar = ({ onNavigate, onSearch, onShowAuth }) => {
           </button>
           <button className="mobile-menu-item" onClick={() => { onNavigate('wishlist'); setMobileMenuOpen(false); }}>
             Wishlist ({wishlist.length})
+          </button>
+          
+          <button className="mobile-menu-item" onClick={() => { onNavigate('orders'); setMobileMenuOpen(false); }}>
+            My Orders
           </button>
           {user && (
             <button className="mobile-menu-item" onClick={() => { onNavigate('profile'); setMobileMenuOpen(false); }}>

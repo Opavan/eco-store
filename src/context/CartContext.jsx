@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useEcoPoints } from "./EcoPointsContext";
 
-
 const CartContext = createContext();
 
 export const useCart = () => {
@@ -24,20 +23,14 @@ export const CartProvider = ({ children }) => {
     if (ecoPoints >= 50 && !badges.includes("eco-starter")) {
       setBadges((prev) => [...prev, "eco-starter"]);
     }
-
     if (ecoPoints >= 100 && !badges.includes("green-warrior")) {
       setBadges((prev) => [...prev, "green-warrior"]);
     }
-
     if (ecoPoints >= 200 && !badges.includes("planet-hero")) {
       setBadges((prev) => [...prev, "planet-hero"]);
     }
   }, [ecoPoints]);
 
-
-
-
-  // Load from localStorage
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     const savedWishlist = localStorage.getItem('wishlist');
@@ -50,30 +43,16 @@ export const CartProvider = ({ children }) => {
     if (savedBadges) setBadges(JSON.parse(savedBadges));
   }, []);
 
-  // Save to localStorage
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
-  }, [wishlist]);
-
-  useEffect(() => {
-    localStorage.setItem('carbonSaved', JSON.stringify(carbonSaved));
-  }, [carbonSaved]);
-
-  useEffect(() => {
-    localStorage.setItem('badges', JSON.stringify(badges));
-  }, [badges]);
+  useEffect(() => { localStorage.setItem('cart', JSON.stringify(cart)); }, [cart]);
+  useEffect(() => { localStorage.setItem('wishlist', JSON.stringify(wishlist)); }, [wishlist]);
+  useEffect(() => { localStorage.setItem('carbonSaved', JSON.stringify(carbonSaved)); }, [carbonSaved]);
+  useEffect(() => { localStorage.setItem('badges', JSON.stringify(badges)); }, [badges]);
 
   const addToCart = (product) => {
     const existingItem = cart.find(item => item.id === product.id);
     if (existingItem) {
       setCart(cart.map(item =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       ));
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
@@ -95,9 +74,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const clearCart = () => {
-    setCart([]);
-  };
+  const clearCart = () => setCart([]);
 
   const toggleWishlist = (product) => {
     const exists = wishlist.find(item => item.id === product.id);
@@ -108,26 +85,14 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const isInWishlist = (productId) => {
-    return wishlist.some(item => item.id === productId);
-  };
+  const isInWishlist = (productId) => wishlist.some(item => item.id === productId);
 
   const checkAndAwardBadges = (totalCarbon, purchaseCount) => {
     const newBadges = [...badges];
-    
-    if (totalCarbon >= 10 && !badges.includes('eco-starter')) {
-      newBadges.push('eco-starter');
-    }
-    if (totalCarbon >= 50 && !badges.includes('green-warrior')) {
-      newBadges.push('green-warrior');
-    }
-    if (totalCarbon >= 100 && !badges.includes('planet-hero')) {
-      newBadges.push('planet-hero');
-    }
-    if (purchaseCount >= 5 && !badges.includes('frequent-buyer')) {
-      newBadges.push('frequent-buyer');
-    }
-    
+    if (totalCarbon >= 10 && !badges.includes('eco-starter')) newBadges.push('eco-starter');
+    if (totalCarbon >= 50 && !badges.includes('green-warrior')) newBadges.push('green-warrior');
+    if (totalCarbon >= 100 && !badges.includes('planet-hero')) newBadges.push('planet-hero');
+    if (purchaseCount >= 5 && !badges.includes('frequent-buyer')) newBadges.push('frequent-buyer');
     setBadges(newBadges);
   };
 

@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import WishlistPage from './pages/WishlistPage';
 import ProfilePage from './pages/ProfilePage';
+import OrderTracking from './pages/OrderTracking'; 
 import AuthModal from './components/AuthModal';
 
 function App() {
@@ -82,6 +83,13 @@ function App() {
                 {currentPage === 'profile' && (
                   <motion.div key="profile" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                     <ProfilePage onNavigate={handleNavigate} />
+                  </motion.div>
+                )}
+
+                
+                {currentPage === 'orders' && (
+                  <motion.div key="orders" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <OrderTracking onNavigate={handleNavigate} />
                   </motion.div>
                 )}
               </AnimatePresence>

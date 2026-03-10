@@ -31,15 +31,42 @@ const Checkout = ({ onNavigate }) => {
     });
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    completePurchase();
-    alert('Order placed successfully! 🌱');
-    onNavigate('home');
+
+    // Create order object
+    const order = {
+      id: 'ECO' + Date.now(),
+      date: new Date().toISOString(),
+      items: cart.map(item => ({
+        id: item.id,
+        name: item.name,
+        image: item.image,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      total,
+      shipping,
+      address: `${formData.address}, ${formData.city} - ${formData.zipCode}`,
+      name: formData.fullName,
+      email: formData.email,
+      status: 'placed',
+      carbonSaved: totalCarbonInCart,
+    };
+
+    // Save to localStorage
+    const existingOrders = JSON.parse(localStorage.getItem('ecoOrders') || '[]');
+    localStorage.setItem('ecoOrders', JSON.stringify([order, ...existingOrders]));
+ 
+   onNavigate('orders');
+setTimeout(() => {
+  completePurchase();
+}, 100);
+    
   };
 
   if (cart.length === 0) {
-    onNavigate('cart');
     return null;
   }
 
