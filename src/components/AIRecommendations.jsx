@@ -21,7 +21,7 @@ const AIRecommendations = ({ currentProduct, onNavigate }) => {
     try {
       setLoading(true);
 
-      const response = await axios.post('http://localhost:3002/api/recommendations', {
+     const response = await axios.post('https://ecomart-backend-58f4.onrender.com/api/recommendations', {
         currentProduct,
         allProducts: products,
       });
